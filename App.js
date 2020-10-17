@@ -30,7 +30,7 @@ export default function App() {
     {
       nome: 'Liar',
       artista: 'One Ok Rock',
-      playing: true,
+      playing: false,
       file: '',
     },
     {
@@ -40,6 +40,20 @@ export default function App() {
       file: '',
     },
   ]);
+
+  const changeMusic = (id)=>{
+    let newMusic = musicas.filter((val, k)=>{
+      if(id==k){
+        musicas[k].playing = true;
+      }
+      else {
+        musicas[k].playing = false;
+      }
+      return musicas[k];
+    })
+    setMusicas(newMusic);
+  }
+
 
   return (
     <ScrollView style={styles.container}>
@@ -55,11 +69,11 @@ export default function App() {
       </View>
 
       {
-        musicas.map((val)=>{
+        musicas.map((val, k)=>{
           if(val.playing){
             return(
               <View style={styles.table}>
-                <TouchableOpacity style={styles.touchable}>
+                <TouchableOpacity style={styles.touchable} onPress={()=>{changeMusic(k)}}>
                   <Text style={[styles.touchableText, {color: '#1db954'}]}>
                     <AntDesign name="play" size={15} color='#1db954' />  
                     {" "} {val.nome}
@@ -72,7 +86,7 @@ export default function App() {
           }else{
             return(
               <View style={styles.table}>
-                <TouchableOpacity style={styles.touchable}>
+                <TouchableOpacity style={styles.touchable} onPress={()=>{changeMusic(k)}}>
                   <Text style={styles.touchableText}><AntDesign name="play" size={15} color='#fff'/>  {val.nome}</Text>
                   <Text style={styles.touchableText}>{val.artista}</Text>
                 </TouchableOpacity>
