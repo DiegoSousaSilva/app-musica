@@ -1,16 +1,87 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, ScrollView, View } from 'react-native';
+import React, {useState} from 'react';
+import { StyleSheet, Text, ScrollView, View, TouchableOpacity } from 'react-native';
 import {Audio} from 'expo-av';
+import {AntDesign} from '@expo/vector-icons';
 
 export default function App() {
+
+  const [audio, setAudio] = useState(null);
+
+  const [musicas, setMusicas] = useState([
+    {
+      nome: 'Kaen',
+      artista: 'Dororo',
+      playing: false,
+      file: '',
+    },
+    {
+      nome: 'Ohayo Sekai, God Morning World',
+      artista: 'Dr. Stone',
+      playing: false,
+      file: '',
+    },
+    {
+      nome: 'Inferno',
+      artista: 'Fire Force',
+      playing: false,
+      file: '',
+    },
+    {
+      nome: 'Liar',
+      artista: 'One Ok Rock',
+      playing: true,
+      file: '',
+    },
+    {
+      nome: 'Sasageyo',
+      artista: 'Atack on Titan',
+      playing: false,
+      file: '',
+    },
+  ]);
+
   return (
     <ScrollView style={styles.container}>
       <StatusBar hidden />
+
       <View style={styles.header}>
-      <Text style={styles.title}>App Musica - Diego Dev</Text>
+        <Text style={styles.title}>App Musica - Diego Dev</Text>
       </View>
-      <StatusBar style="auto" />
+
+      <View style={styles.table}>
+        <Text style={styles.tableText}>Música</Text>
+        <Text style={styles.tableText}>Artísta</Text>
+      </View>
+
+      {
+        musicas.map((val)=>{
+          if(val.playing){
+            return(
+              <View style={styles.table}>
+                <TouchableOpacity style={styles.touchable}>
+                  <Text style={[styles.touchableText, {color: '#1db954'}]}>
+                    <AntDesign name="play" size={15} color='#1db954' />  
+                    {" "} {val.nome}
+                  </Text>
+                  <Text style={[styles.touchableText, {color: '#1db954'}]}>{val.artista}</Text>
+                </TouchableOpacity>
+              </View>
+            )
+
+          }else{
+            return(
+              <View style={styles.table}>
+                <TouchableOpacity style={styles.touchable}>
+                  <Text style={styles.touchableText}><AntDesign name="play" size={15} color='#fff'/>  {val.nome}</Text>
+                  <Text style={styles.touchableText}>{val.artista}</Text>
+                </TouchableOpacity>
+              </View>
+            )
+          }
+        })
+      }
+      
     </ScrollView>
   );
 }
@@ -29,5 +100,23 @@ const styles = StyleSheet.create({
     textAlign:'center',
     color: '#fff',
     fontSize: 20,
+  },
+  table: {
+    flexDirection: "row",
+    padding: 20,
+    borderBottomColor: '#fff',
+    borderBottomWidth: 1,
+  },
+  tableText: {
+    width: '50%',
+    color: 'rgb(200,200,200)',
+  },
+  touchable: {
+    width: '100%',
+    flexDirection: 'row',
+  },
+  touchableText: {
+    width: '50%',
+    color: '#fff',
   },
 });
