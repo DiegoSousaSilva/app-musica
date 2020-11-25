@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, ScrollView, View, TouchableOpacity, LogBox } from 'react-native';
 import {Audio} from 'expo-av';
 import {AntDesign} from '@expo/vector-icons';
@@ -139,6 +139,7 @@ export default function App() {
     },             
   ]);
 
+
   const changeMusic = async (id) =>{
     let curFile = null;
     let newMusic = musicas.filter((val, k)=>{
@@ -164,6 +165,7 @@ export default function App() {
     try{
       await curAudio.loadAsync(curFile);
       await curAudio.playAsync();
+
     }catch(error){}
 
     setAudio(curAudio);
