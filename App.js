@@ -8,7 +8,7 @@ import Player from './src/components/Player';
 
 export default function App() {
 
-  LogBox.ignoreAllLogs(true);
+  //LogBox.ignoreAllLogs(true);
 
   const [audioIndex, setAudioIndex] = useState(0);
 
@@ -18,29 +18,125 @@ export default function App() {
 
   const [musicas, setMusicas] = useState([
     {
-      nome: 'Kaen',
-      artista: 'Dororo',
+      nome: 'The Day',
+      artista: 'Boku no hero academia',
       playing: false,
-      file: require('./src/midia/Dororo.mp3'),
+      file: require('./src/midia/bokunohero.m4a'),
     },
     {
-      nome: 'Black Cat',
-      artista: 'Black Clover',
+      nome: 'Baton Road',
+      artista: 'Boruto',
       playing: false,
-      file: require('./src/midia/BlackCat.mp3'),
+      file: require('./src/midia/boruto.m4a'),
     },
     {
-      nome: 'Liar',
-      artista: 'One Ok Rock',
+      nome: 'Brave Heart',
+      artista: 'Digimon',
       playing: false,
-      file: require('./src/midia/Liar.m4a'),
+      file: require('./src/midia/braveheart.m4a'),
     },
     {
-      nome: 'Sasageyo',
-      artista: 'Atack on Titan',
+      nome: 'Sorriso Resplandescente',
+      artista: 'Dragon Ball GT',
       playing: false,
-      file: require('./src/midia/Sasageyo.mp3'),
+      file: require('./src/midia/dbgtcoracaodecrianca.m4a'),
     },
+    {
+      nome: 'Limit Break X Survivor',
+      artista: 'Dragon Ball Super',
+      playing: false,
+      file: require('./src/midia/dbs2.m4a'),
+    },
+    {
+      nome: 'Cha La Head Cha La',
+      artista: 'Dragon Ball Z',
+      playing: false,
+      file: require('./src/midia/dbzchalaheadchala.m4a'),
+    },
+    {
+      nome: 'We Gotta Power (Temos a força)',
+      artista: 'Dragon Ball Z',
+      playing: false,
+      file: require('./src/midia/dragonballz.m4a'),
+    },
+    {
+      nome: 'Coações Que Querem Se Encontrar',
+      artista: 'Inuyasha',
+      playing: false,
+      file: require('./src/midia/inuyashaend4.m4a'),
+    },    
+    {
+      nome: 'Mudar o Mundo',
+      artista: 'Inuyasha',
+      playing: false,
+      file: require('./src/midia/inuyashamudaromundo.m4a'),
+    },
+    {
+      nome: 'Pout Porre - Jiraya Winspector Sharivan  ',
+      artista: 'Desconhecido',
+      playing: false,
+      file: require('./src/midia/jirayawinspectorsharivan.m4a'),
+    },
+    {
+      nome: 'Netsujou No Spectrum',
+      artista: 'Nanatsu No Taizai',
+      playing: false,
+      file: require('./src/midia/nanatsunotaizai.m4a'),
+    },
+    {
+      nome: 'Sorriso Resplandescente',
+      artista: 'Dragon Ball GT',
+      playing: false,
+      file: require('./src/midia/dbgtcoracaodecrianca.m4a'),
+    },
+    {
+      nome: 'Limit Break X Survivor',
+      artista: 'Dragon Ball Super',
+      playing: false,
+      file: require('./src/midia/dbs2.m4a'),
+    },
+    {
+      nome: 'Haruka Kanata',
+      artista: 'Naruto',
+      playing: false,
+      file: require('./src/midia/naruto.m4a'),
+    },
+    {
+      nome: 'Niwaka Ame Nimo Makezu',
+      artista: 'Naruto Shipudden',
+      playing: false,
+      file: require('./src/midia/narutoop13.m4a'),
+    },
+    {
+      nome: 'Temos Que Pegar',
+      artista: 'Pokemon',
+      playing: false,
+      file: require('./src/midia/pokemon.m4a'),
+    },
+    {
+      nome: 'Pegasus Fantasy',
+      artista: 'Cavaleiros Do Zodiaco',
+      playing: false,
+      file: require('./src/midia/saintseiya.m4a'),
+    },
+    {
+      nome: 'Soldier Dream',
+      artista: 'Cavaleiros Do Zodiaco',
+      playing: false,
+      file: require('./src/midia/soldierdream.m4a'),
+    },
+    {
+      nome: 'Unravel',
+      artista: 'Tokyo Ghoul',
+      playing: false,
+      file: require('./src/midia/tokyoghoulunravel.m4a'),
+    },
+    {
+      nome: 'Sorriso Contagiante',
+      artista: 'Yu Yu Hakusho',
+      playing: false,
+      file: require('./src/midia/yuyuhakusho.m4a'),
+    },             
   ]);
 
   const changeMusic = async (id) =>{
@@ -68,7 +164,6 @@ export default function App() {
     try{
       await curAudio.loadAsync(curFile);
       await curAudio.playAsync();
-      
     }catch(error){}
 
     setAudio(curAudio);
@@ -94,7 +189,7 @@ export default function App() {
           musicas.map((val, k)=>{
             if(val.playing){
               return(
-                <View style={styles.table}>
+                <View key={k} style={styles.table}>
                   <TouchableOpacity style={styles.touchable} onPress={()=>changeMusic(k)}>
                     <Text style={[styles.touchableText, {color: '#1db954'}]}>
                       <AntDesign name="pause" size={15} color='#1db954' />  
@@ -107,7 +202,7 @@ export default function App() {
 
             }else{
               return(
-                <View style={styles.table}>
+                <View key={k} style={styles.table}>
                   <TouchableOpacity style={styles.touchable} onPress={()=>changeMusic(k)}>
                     <Text style={styles.touchableText}><AntDesign name="play" size={15} color='#fff'/>  {val.nome}</Text>
                     <Text style={styles.touchableText}>{val.artista}</Text>

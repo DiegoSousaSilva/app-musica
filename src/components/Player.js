@@ -24,6 +24,14 @@ const Player = (props) => {
           props.setPlaying(true);
           props.setMusicas(newMusic);
           await props.audio.playAsync();
+          await curAudio.getStatusAsync()
+          .then((res)=>{
+            dur = res.durationMillis;
+            pos = res.positionMillis;
+            if (posicao >= duracao){
+              handleNext();
+            }
+          }).catch(failureCallback);
        }else {
          let curAudio = new Audio.Sound();
          try{ 
